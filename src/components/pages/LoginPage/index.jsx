@@ -8,16 +8,16 @@ const LoginPage = () => {
     <form onSubmit={(e) => e.preventDefault()}>
       <label htmlFor="login">
         Логин
-        <input type="text" name="login" />
+        <input type="text" name="login" placeholder="Логин" />
       </label>
       <label htmlFor="password">
         Пароль
-        <input type="password" name="password" />
+        <input type="password" name="password" placeholder="Пароль" />
       </label>
       <button type="submit" onClick={onSubmit}>
         Войти
       </button>
-      <Link to="/signup">Нет аккаунта? Зарегестрироваться</Link>
+      <Link href="/signup">Нет аккаунта? Зарегестрироваться</Link>
     </form>
   );
 };

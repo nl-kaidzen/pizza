@@ -21,7 +21,7 @@ const SignupPage = () => {
       <button type="submit" onClick={onSubmit}>
         Зарегестрироваться
       </button>
-      <Link to="/signup">Есть аккаунт? Авторизоваться</Link>
+      <Link to="/login">Есть аккаунт? Авторизоваться</Link>
     </form>
   );
 };
