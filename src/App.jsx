@@ -9,6 +9,7 @@ import PizzaWizardPage from 'components/pages/PizzaWizardPage';
 import PreviousOrdersPage from 'components/pages/PreviousOrdersPage';
 import PizzaConfirmationPage from 'components/pages/PizzaConfirmationPage';
 import PageNotFound from 'components/pages/404';
+import PaymentPage from 'components/pages/PaymentPage';
 
 function App() {
   const isAuthenticated = true;
@@ -32,6 +33,9 @@ function App() {
           <li>
             <Link to="/orders">Предыдущие заказы</Link>
           </li>
+          <li>
+            <Link to="/payment">Оплата</Link>
+          </li>
         </ul>
       </div>
       <Switch>
@@ -49,6 +53,9 @@ function App() {
         </PrivateRoute>
         <PrivateRoute path="/orders" isAuthenticated={isAuthenticated}>
           <PreviousOrdersPage />
+        </PrivateRoute>
+        <PrivateRoute path="/payment" isAuthenticated={isAuthenticated}>
+          <PaymentPage />
         </PrivateRoute>
         <Route>
           <PageNotFound />

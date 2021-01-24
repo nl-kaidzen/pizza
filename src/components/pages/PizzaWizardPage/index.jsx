@@ -1,4 +1,6 @@
+/* eslint-disable no-console */
 import React, { useCallback, useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 
 import CheckboxGroup from 'components/common/CheckboxGroup';
 import RadioGroup from 'components/common/RadioGroup';
@@ -31,6 +33,7 @@ const PizzaWizard = () => {
   const [toppings, setToppings] = useState(TOPING_INIT_STATE);
   const [totalPrice, setTotalPrice] = useState(BASIC_PRICE);
   const [isConfirmationVisible, setConfirmationVisible] = useState(false);
+  const { register, handleSubmit } = useForm();
 
   const handleCheckboxToggle = useCallback(
     (topping) =>
@@ -42,6 +45,8 @@ const PizzaWizard = () => {
       }),
     [],
   );
+
+  const onSubmit = (data) => console.dir(data);
 
   const handleDoughChange = useCallback((value) => setDough(value), []);
   const handleSauceChange = useCallback((value) => setSauce(value), []);
@@ -57,7 +62,7 @@ const PizzaWizard = () => {
 
   return (
     <>
-      <form onSubmit={(e) => e.preventDefault()}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <h1>Pizza Wizard v1.0</h1>
         <h2>Размер</h2>
         <RadioGroup
@@ -65,6 +70,7 @@ const PizzaWizard = () => {
           value={size}
           name="pizza_size"
           onChange={handleSizeChange}
+          ref={register}
         />
         <h2>Тесто</h2>
         <RadioGroup
@@ -72,6 +78,7 @@ const PizzaWizard = () => {
           value={dough}
           name="pizza_dough"
           onChange={handleDoughChange}
+          ref={register}
         />
         <h2>Соус</h2>
         <RadioGroup
@@ -79,13 +86,29 @@ const PizzaWizard = () => {
           value={sauce}
           name="pizza_sauce"
           onChange={handleSauceChange}
+          ref={register}
         />
         <h2>Мясные топинги</h2>
-        <CheckboxGroup checkboxes={MEET_ARRAY} onChange={handleCheckboxToggle} />
+        <CheckboxGroup
+          checkboxes={MEET_ARRAY}
+          onChange={handleCheckboxToggle}
+          name="meet"
+          ref={register}
+        />
         <h2>Сыр</h2>
-        <CheckboxGroup checkboxes={CHEESE_ARRAY} onChange={handleCheckboxToggle} />
+        <CheckboxGroup
+          checkboxes={CHEESE_ARRAY}
+          onChange={handleCheckboxToggle}
+          name="cheese"
+          ref={register}
+        />
         <h2>Овощи</h2>
-        <CheckboxGroup checkboxes={VEGETABLES_ARRAY} onChange={handleCheckboxToggle} />
+        <CheckboxGroup
+          checkboxes={VEGETABLES_ARRAY}
+          onChange={handleCheckboxToggle}
+          name="vegetables"
+          ref={register}
+        />
         <button type="submit" onClick={handleSubmitClick}>
           {totalPrice}
         </button>
